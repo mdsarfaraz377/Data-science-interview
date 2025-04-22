@@ -1,0 +1,41 @@
+Excel vs SQL vs Python (pandas):
+
+1️⃣ Filtering Data
+ ↳ Excel: =FILTER(A2:D100, B2:B100>50) (Excel 365 users)
+ ↳ SQL: SELECT * FROM table WHERE column > 50;
+ ↳ Python: df_filtered = df[df['column'] > 50]
+
+2️⃣ Sorting Data
+ ↳ Excel: Data → Sort (or =SORT(A2:A100, 1, TRUE))
+ ↳ SQL: SELECT * FROM table ORDER BY column ASC;
+ ↳ Python: df_sorted = df.sort_values(by="column")
+
+3️⃣ Counting Rows
+ ↳ Excel: =COUNTA(A:A)
+ ↳ SQL: SELECT COUNT(*) FROM table;
+ ↳ Python: row_count = len(df)
+
+4️⃣ Removing Duplicates
+ ↳ Excel: Data → Remove Duplicates
+ ↳ SQL: SELECT DISTINCT * FROM table;
+ ↳ Python: df_unique = df.drop_duplicates()
+
+5️⃣ Joining Tables
+ ↳ Excel: Power Query → Merge Queries (or VLOOKUP/XLOOKUP)
+ ↳ SQL: SELECT * FROM table1 JOIN table2 ON table1.id = table2.id;
+ ↳ Python: df_merged = pd.merge(df1, df2, on="id")
+
+6️⃣ Ranking Data
+ ↳ Excel: =RANK.EQ(A2, $A$2:$A$100)
+ ↳ SQL: SELECT column, RANK() OVER (ORDER BY column DESC) AS rank FROM table;
+ ↳ Python: df["rank"] = df["column"].rank(method="min", ascending=False)
+
+7️⃣ Moving Average Calculation
+ ↳ Excel: =AVERAGE(B2:B4) (manually for rolling window)
+ ↳ SQL: SELECT date, AVG(value) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS moving_avg FROM table;  
+↳ Python: df["moving_avg"] = df["value"].rolling(window=3).mean()  
+
+8️⃣ Running Total
+ ↳ Excel: =SUM($B$2:B2) (drag down)
+ ↳ SQL: SELECT date, SUM(value) OVER (ORDER BY date) AS running_total FROM table;  
+↳ Python: df["running_total"] = df["value"].cumsum()
